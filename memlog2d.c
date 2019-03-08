@@ -73,10 +73,15 @@ int main()
                 break;
         }
         char buffer[MAXLINE];
+	int memvalues[3];
 	for (int i = 0; i < 3; ++i) {
 	        fgets(buffer, MAXLINE, meminfo);
-		fputs(buffer, output);		
+		sscanf(buffer, "%d", &memvalues[i]);
+	//	fputs(buffer, output);
         }
+	// time, memtotal, memfree
+	sprintf (buffer, "%d;%d;%d", memvalues[0], memvalues[1], memvalues[2]);
+        fputs(buffer, output);
 	fclose(meminfo);
 	fclose(output);
         syslog (LOG_NOTICE, "memlog2d started.");
